@@ -1,10 +1,11 @@
 "use client";
  
+import { useFingerDetectionContext } from "@/context/FingerDetectionContext";
 import { useFingerDetection } from "@/hooks/handDetectionNav";
  
 export default function FingerNav() {
   const { fingerCount, isRunning, enable, disable, error, videoElRef } =
-    useFingerDetection();
+    useFingerDetectionContext();
  
   return (
     <div className="fixed bottom-6 right-6 flex flex-col items-end gap-2">
