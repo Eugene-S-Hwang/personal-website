@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import FingerNav from "./FingerNav";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -17,6 +18,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-black/[0.07]">
+      <FingerNav />
       <div className="max-w-5xl mx-auto px-6 h-[60px] flex items-center justify-between">
 
         {/* Logo */}
