@@ -1,6 +1,5 @@
 import { useState, useRef, useCallback, useEffect, RefObject } from "react";
 import { FilesetResolver, HandLandmarker } from "@mediapipe/tasks-vision";
-import { useRouter } from "next/navigation";
 
 const MODEL = "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task";
 
@@ -11,17 +10,17 @@ const FINGER_PAIRS = [
     [20, 19],  // pinky
 ];
 
-const HAND_CONNECTIONS = [
-    [0,1],[1,2],[2,3],[3,4],        // thumb
-    [0,5],[5,6],[6,7],[7,8],        // index
-    [0,9],[9,10],[10,11],[11,12],   // middle
-    [0,13],[13,14],[14,15],[15,16], // ring
-    [0,17],[17,18],[18,19],[19,20], // pinky
-    [5,9],[9,13],[13,17],           // palm
-];
+// const HAND_CONNECTIONS = [
+//     [0,1],[1,2],[2,3],[3,4],        // thumb
+//     [0,5],[5,6],[6,7],[7,8],        // index
+//     [0,9],[9,10],[10,11],[11,12],   // middle
+//     [0,13],[13,14],[14,15],[15,16], // ring
+//     [0,17],[17,18],[18,19],[19,20], // pinky
+//     [5,9],[9,13],[13,17],           // palm
+// ];
 
-const PAGES = ["/", "/activities", "/blog", "/contact"];
-const numbers = [1, 2, 3, 4]
+const PAGES = ["home", "activities", "blog", "projects", "contacts"];
+const numbers = [1, 2, 3, 4, 5]
 
 const PAGES_MAP = new Map<number, string>();
 
@@ -65,7 +64,7 @@ interface UseFingerDetectionReturn {
     videoElRef: RefObject<HTMLVideoElement | null>;
 }
 
-export function useFingerDetection() : UseFingerDetectionReturn {
+export function useFingerDetection(onNavigate: (viewId: string) => void) : UseFingerDetectionReturn {
     const [fingerCount, setFingerCount] = useState<number | null>(null);
     const [isRunning, setIsRunning] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -77,7 +76,6 @@ export function useFingerDetection() : UseFingerDetectionReturn {
     const streakRef       = useRef<number>(0);
     const lastConfirmed   = useRef<number | null>(null);
     const isCoolingDown   = useRef<boolean>(false);
-    const router = useRouter();
 
     const videoElRef = useRef<HTMLVideoElement | null>(null);
     
@@ -118,12 +116,14 @@ export function useFingerDetection() : UseFingerDetectionReturn {
         return null;
     }, []);
 
+    const detectRef = useRef<() => void>(() => {});
+
     const detect = useCallback(() => {
         if(!isCoolingDown.current){
             const video = videoRef.current;
             const landmarker = landmarkerRef.current;
             if (!video || !landmarker || video.readyState < 2) {
-                rafRef.current = requestAnimationFrame(detect);
+                rafRef.current = requestAnimationFrame(detectRef.current);
                 return;
             }
 
@@ -139,7 +139,7 @@ export function useFingerDetection() : UseFingerDetectionReturn {
                 if(confirmed_count !== null){
                     const newPage = PAGES_MAP.get(confirmed_count);
                     if(newPage){
-                        router.push(newPage);
+                        onNavigate(newPage);
                         isCoolingDown.current = true;
                         setTimeout(() => {isCoolingDown.current = false}, 1000);
                     }
@@ -152,9 +152,13 @@ export function useFingerDetection() : UseFingerDetectionReturn {
                 setFingerCount(null);
             }
         }
-        rafRef.current = requestAnimationFrame(detect);
+        rafRef.current = requestAnimationFrame(detectRef.current);
         
-    }, [debounce]);
+    }, [debounce, onNavigate]);
+
+    useEffect(() => {
+        detectRef.current = detect;
+    }, [detect]);
 
     const enable = useCallback(async () => {
         setError(null);
@@ -176,14 +180,14 @@ export function useFingerDetection() : UseFingerDetectionReturn {
 
             videoRef.current = video;
             setIsRunning(true);
-            rafRef.current = requestAnimationFrame(detect);
+            rafRef.current = requestAnimationFrame(detectRef.current);
         }
         catch (err) {
             setError(
                 err instanceof Error ? err.message : "Could not access webcam."
             );
         }
-    }, [initLandmarker, detect]);
+    }, [initLandmarker]);
 
     const disable = useCallback(() => {
         if (rafRef.current) {
@@ -211,23 +215,3 @@ export function useFingerDetection() : UseFingerDetectionReturn {
 
     return { fingerCount, isRunning, enable, disable, error, videoElRef };
 }
-
-
-
-
-// await handLandmarker.setOptions({ runningMode: "VIDEO" });
-
-// let lastVideoTime = -1;
-// function renderLoop(): void {
-//     const video = document.getElementById("video");
-
-//     if (video.currentTime !== lastVideoTime) {
-//         const detections = handLandmarker.detectForVideo(video);
-//         processResults(detections);
-//         lastVideoTime = video.currentTime;
-//     }
-
-//     requestAnimationFrame(() => {
-//         renderLoop();
-//     });
-// }

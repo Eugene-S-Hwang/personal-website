@@ -1,63 +1,57 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
-import FingerNav from "./FingerNav";
 
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Activities", href: "/activities" },
-  { label: "Blog", href: "/blog" },
-  { label: "Projects", href: "/projects"}
+interface TopNavProps {
+  currentView: string;
+  onNavigate: (viewId: string) => void;
+}
+
+const navItems = [
+  { id: 'home', label: 'Home' },
+  { id: 'activities', label: 'Activities' },
+  { id: 'blog', label: 'Blog' },
+  { id: 'projects', label: 'Projects'}
 ];
 
-export default function Navbar() {
-  const pathname = usePathname();
+export default function Navbar({ currentView, onNavigate }: TopNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-black/[0.07]">
-      <FingerNav />
       <div className="max-w-5xl mx-auto px-6 h-[60px] flex items-center justify-between">
 
         {/* Logo */}
-        <Link
-          href="/"
-          className="font-serif italic text-xl tracking-tight text-neutral-900 select-none"
+        <button
+          className="font-serif italic text-xl tracking-tight text-neutral-900 select-none cursor-pointer"
+          onClick={() => onNavigate('home')}
         >
           Eugene Hwang
-        </Link>
+        </button>
 
         {/* Desktop links */}
         <ul className="hidden sm:flex items-center gap-1 list-none">
-          {NAV_LINKS.map(({ label, href }) => {
-            const isActive = pathname === href;
-            return (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className={[
-                    "relative font-mono text-[11px] tracking-widest uppercase px-3.5 py-1.5 rounded-lg transition-colors duration-150",
-                    isActive
-                      ? "text-neutral-900 font-medium after:absolute after:bottom-[-2px] after:left-3.5 after:right-3.5 after:h-px after:bg-neutral-900 after:rounded-full"
-                      : "text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100",
-                  ].join(" ")}
-                >
-                  {label}
-                </Link>
-              </li>
-            );
-          })}
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              className={`nav-item ${
+                currentView === item.id 
+                  ? "text-neutral-900 font-medium after:absolute after:bottom-[-2px] after:left-3.5 after:right-3.5 after:h-px after:bg-neutral-900 after:rounded-full"
+                  : "text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100"}`}
+              onClick={() => onNavigate(item.id)}
+            >
+              <span className="relative font-mono text-[11px] tracking-widest uppercase px-3.5 py-1.5 rounded-lg transition-colors duration-150 cursor-pointer">{item.label}</span>
+            </button>
+          ))}
         </ul>
 
         {/* Desktop CTA */}
-        <Link
-          href="/contact"
-          className="hidden sm:inline-flex font-mono text-[11px] tracking-wider uppercase font-medium text-neutral-900 border border-black/20 px-4 py-1.5 rounded-lg hover:bg-neutral-100 transition-colors duration-150"
+        <button
+          className="hidden sm:inline-flex font-mono text-[11px] tracking-wider uppercase font-medium text-neutral-900 border border-black/20 px-4 py-1.5 rounded-lg hover:bg-neutral-100 transition-colors duration-150 cursor-pointer"
+          onClick = {() => onNavigate('contacts')}
         >
           Contact →
-        </Link>
+        </button>
 
         {/* Hamburger */}
         <button
@@ -90,29 +84,28 @@ export default function Navbar() {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="sm:hidden absolute top-[68px] left-4 right-4 bg-white border border-black/[0.08] rounded-xl p-2 shadow-sm z-50">
-          {NAV_LINKS.map(({ label, href }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setMenuOpen(false)}
-              className={[
-                "block font-mono text-[11px] tracking-widest uppercase px-3.5 py-2.5 rounded-lg transition-colors duration-150",
-                pathname === href
-                  ? "text-neutral-900 bg-neutral-100 font-medium"
-                  : "text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100",
-              ].join(" ")}
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              className={`nav-item ${
+                currentView === item.id 
+                  ? "text-neutral-900 font-medium after:absolute after:bottom-[-2px] after:left-3.5 after:right-3.5 after:h-px after:bg-neutral-900 after:rounded-full"
+                  : "text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100"}`}
+              onClick={() => onNavigate(item.id)}
             >
-              {label}
-            </Link>
+              <span className="relative font-mono text-[11px] tracking-widest uppercase px-3.5 py-1.5 rounded-lg transition-colors duration-150">{item.label}</span>
+            </button>
           ))}
           <div className="h-px bg-black/[0.07] my-1.5" />
-          <Link
-            href="/contact"
-            onClick={() => setMenuOpen(false)}
+          <button
             className="block font-mono text-[11px] tracking-widest uppercase px-3.5 py-2.5 rounded-lg text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100 transition-colors duration-150"
+            onClick = {() => {
+              onNavigate('contacts');
+              setMenuOpen(false);
+            }}
           >
-            Contact
-          </Link>
+            Contact →
+          </button>
         </div>
       )}
     </nav>
