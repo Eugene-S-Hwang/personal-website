@@ -76,6 +76,7 @@ export function useFingerDetection() : UseFingerDetectionReturn {
     const candidateRef    = useRef<number>(0);
     const streakRef       = useRef<number>(0);
     const lastConfirmed   = useRef<number | null>(null);
+    const isCoolingDown   = useRef<boolean>(false);
     const router = useRouter();
 
     const videoElRef = useRef<HTMLVideoElement | null>(null);
@@ -118,38 +119,41 @@ export function useFingerDetection() : UseFingerDetectionReturn {
     }, []);
 
     const detect = useCallback(() => {
-        const video     = videoRef.current;
-        const landmarker = landmarkerRef.current;
-        if (!video || !landmarker || video.readyState < 2) {
-            rafRef.current = requestAnimationFrame(detect);
-            return;
-        }
+        if(!isCoolingDown.current){
+            const video = videoRef.current;
+            const landmarker = landmarkerRef.current;
+            if (!video || !landmarker || video.readyState < 2) {
+                rafRef.current = requestAnimationFrame(detect);
+                return;
+            }
 
-        const detections = landmarker.detectForVideo(video, performance.now());
+            const detections = landmarker.detectForVideo(video, performance.now());
 
-        if(detections.landmarks.length > 0){
-            const landmarks = detections.landmarks[0];
-            const handedness = detections.handedness[0][0].displayName;
-            const raw_count = count_fingers(landmarks, handedness);
-            const confirmed_count = debounce(raw_count);
-
-            if(confirmed_count !== null){
+            if(detections.landmarks.length > 0){
+                const landmarks = detections.landmarks[0];
+                const handedness = detections.handedness[0][0].displayName;
+                const raw_count = count_fingers(landmarks, handedness);
+                const confirmed_count = debounce(raw_count);
                 setFingerCount(raw_count);
-                const newPage = PAGES_MAP.get(confirmed_count);
-                if(newPage){
-                    router.push(newPage);
-                    requestAnimationFrame(enable);
+
+                if(confirmed_count !== null){
+                    const newPage = PAGES_MAP.get(confirmed_count);
+                    if(newPage){
+                        router.push(newPage);
+                        isCoolingDown.current = true;
+                        setTimeout(() => {isCoolingDown.current = false}, 1000);
+                    }
                 }
             }
+            else{
+                candidateRef.current = 0;
+                streakRef.current = 0;
+                lastConfirmed.current = null;
+                setFingerCount(null);
+            }
         }
-        else{
-            candidateRef.current = 0;
-            streakRef.current = 0;
-            lastConfirmed.current = null;
-            setFingerCount(null);
-        }
-
         rafRef.current = requestAnimationFrame(detect);
+        
     }, [debounce]);
 
     const enable = useCallback(async () => {
