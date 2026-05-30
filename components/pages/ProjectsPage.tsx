@@ -12,6 +12,13 @@ const GENERAL_PROJECTS: ProjectCardProps[] = [
     href: "https://github.com/allanhotpotato/ProdHacks-ab2gene-",
   },
   {
+    title: "This personal website!",
+    description:
+      "This personal website that you are currently on! Includes a finger navigation feature powered by MediaPipe.",
+    tags: ["React", "Next.js", "TypeScript", "MediaPipe"],
+    href: "https://github.com/Eugene-S-Hwang/personal-website",
+  },
+  {
     title: "Personal Kanban Board",
     description:
       "A personal kanban board that I quickly made in a weekend.",
@@ -115,7 +122,7 @@ export default function ProjectsPage() {
       `}</style>
 
       <div className="font-mono-dm min-h-screen overflow-x-hidden bg-[#080b10] text-slate-200">
-        <section className="relative mx-auto max-w-5xl px-12 pb-12 pt-32">
+        <section className="relative mx-auto max-w-5xl px-12 pb-12 pt-20">
           <div className="pointer-events-none absolute left-1/2 top-1/4 h-[500px] w-[500px]
                           -translate-x-1/4 rounded-full
                           bg-[radial-gradient(circle,rgba(74,222,128,0.07)_0%,transparent_70%)]" />

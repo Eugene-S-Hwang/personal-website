@@ -29,11 +29,16 @@ export default function HomePage({ onNavigate } : HomePageProps) {
       <div className="font-mono-dm min-h-screen overflow-x-hidden bg-[#080b10] text-slate-200">
         {/* ── Hero ────────────────────────────────────────── */}
         <section className="relative mx-auto flex max-w-5xl flex-col
-                            justify-center px-12 pb-20 pt-32">
+                            px-12 pb-20 pt-20">
           {/* background glow */}
           <div className="pointer-events-none absolute left-1/2 top-1/4 h-[500px] w-[500px]
                           -translate-x-1/4 rounded-full
                           bg-[radial-gradient(circle,rgba(74,222,128,0.07)_0%,transparent_70%)]" />
+
+          <div className={`mb-8 transition-all duration-700
+                          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <span className="text-red-400 text-l">Try the finger navigation!</span>
+          </div>
 
           <div className={`transition-all duration-700 delay-[50ms]
                           ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>

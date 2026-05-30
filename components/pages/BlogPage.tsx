@@ -15,7 +15,7 @@ export default function BlogPage() {
       `}</style>
 
       <div className="font-mono-dm min-h-screen overflow-x-hidden bg-[#080b10] text-slate-200">
-        <section className="relative mx-auto flex max-w-5xl flex-col justify-center px-12 pb-20 pt-32">
+        <section className="relative mx-auto flex max-w-5xl flex-col px-12 pb-20 pt-20">
           <div className="pointer-events-none absolute left-1/2 top-1/4 h-[500px] w-[500px]
                           -translate-x-1/4 rounded-full
                           bg-[radial-gradient(circle,rgba(74,222,128,0.07)_0%,transparent_70%)]" />
