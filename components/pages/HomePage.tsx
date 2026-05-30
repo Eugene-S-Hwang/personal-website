@@ -115,7 +115,7 @@ export default function HomePage({ onNavigate } : HomePageProps) {
               <p>
                 When I&apos;m not coding, I&apos;m probably playing Minecraft, learning how to cook, 
                 or hopefully touching some lovely grass. Feel free to{" "}
-                <a href="#contact" className="text-green-400 hover:underline">reach out</a>{" "}!.
+                <span className="text-green-400 hover:underline">reach out</span>{" "}!.
               </p>
             </div>
 
