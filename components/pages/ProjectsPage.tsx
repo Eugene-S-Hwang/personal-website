@@ -1,7 +1,107 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
+import ProjectCard, { type ProjectCardProps } from "@/components/ProjectCard";
+
+const GENERAL_PROJECTS: ProjectCardProps[] = [
+  {
+    title: "Grantflow",
+    description:
+      "Helps nonprofits find grants, get personalized recommendations, and complete applications with fine-tuned LLMs and RAG.",
+    tags: ["LLM", "RAG", "React", "TypeScript"],
+    href: "https://github.com/allanhotpotato/ProdHacks-ab2gene-",
+  },
+  {
+    title: "Personal Kanban Board",
+    description:
+      "A personal kanban board that I quickly made in a weekend.",
+    tags: ["Supabase", "React", "TypeScript"],
+    href: "https://github.com/Eugene-S-Hwang/Personal_Kanban_Board",
+  },
+  {
+    title: "Score Calculator for CMWMC (Carnegie Mellon Winter Math Competition)",
+    description:
+      "A score calculator for participants of CMWMC 2025. Sent to over 60+ participants of the contest.",
+    tags: ["Python", "Streamlit", "Google Sheets API"],
+    href: "https://github.com/Eugene-S-Hwang/CMWMC_2025_Score_Calculator",
+  },
+];
+
+const CONTEST_PROJECTS: ProjectCardProps[] = [
+  {
+    title: "MosaicGPU",
+    description:
+      "Reached TartanHacks 2026 Top 10. A web application that utilizes GPU power of multiple devices for 3D image rendering.",
+    tags: ["Supabase", "AWS", "WebGPU", "React"],
+    href: "https://github.com/asanth7/distributeGPU",
+  },
+  {
+    title: "AWAP 2026 Game Engine",
+    description:
+      "Won 4th Place in Algorithms with a Purpose 2026 (Advanced Division). An algorithmic programming competition hosted by ACM@CMU.",
+    tags: ["Python"],
+    href: "https://github.com/Eugene-S-Hwang/awap-2026",
+  },
+  {
+    title: "CompostED",
+    description:
+      "A virtual compost simulator that my teammate and I submitted to HackNYU 2025.",
+    tags: ["Python", "Streamlit", "Ollama"],
+    href: "https://devpost.com/software/composted",
+  },
+  {
+    title: "My USACO Solutions",
+    description:
+      "My solutions for various USACO problems, ranging from Bronze to Gold division.",
+    tags: ["C++", "Python"],
+    href: "https://github.com/Eugene-S-Hwang/USACO",
+  },
+];
+
+const RESEARCH_PROJECTS: ProjectCardProps[] = [
+  {
+    title: "Detecting Specialized Words",
+    description:
+      "Part of my research at the LTI. Downloading arXiv papers and running TF-IDF and BM25 analyses on them.",
+    tags: ["Python", "Streamlit", "Google Cloud Platform", "TF-IDF", "BM25"],
+    href: "https://github.com/Eugene-S-Hwang/specialized_terms",
+  },
+  {
+    title: "Analyzing Semantic Shifts within American Political Parties",
+    description:
+      "My research project for the Wolfram Summer Research Program in 2024.",
+    tags: [
+      "Wolfram Language",
+      "Word Embedding",
+      "Natural Language Processing",
+      "ML",
+      "TF-IDF",
+    ],
+    href: "https://community.wolfram.com/groups/-/m/t/3213886",
+  },
+];
+
+const PROJECT_SECTIONS = [
+  { title: "General", projects: GENERAL_PROJECTS },
+  { title: "Contest Answers", projects: CONTEST_PROJECTS },
+  { title: "Research", projects: RESEARCH_PROJECTS },
+] as const;
+
+function ProjectGrid({ projects }: { projects: ProjectCardProps[] }) {
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project) => (
+        <ProjectCard
+          key={project.title}
+          title={project.title}
+          description={project.description}
+          tags={project.tags}
+          href={project.href}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function ProjectsPage() {
   const [mounted, setMounted] = useState(false);
@@ -15,66 +115,37 @@ export default function ProjectsPage() {
       `}</style>
 
       <div className="font-mono-dm min-h-screen overflow-x-hidden bg-[#080b10] text-slate-200">
-        <section className="relative mx-auto flex max-w-5xl flex-col justify-center px-12 pb-20 pt-32">
+        <section className="relative mx-auto max-w-5xl px-12 pb-12 pt-32">
           <div className="pointer-events-none absolute left-1/2 top-1/4 h-[500px] w-[500px]
                           -translate-x-1/4 rounded-full
                           bg-[radial-gradient(circle,rgba(74,222,128,0.07)_0%,transparent_70%)]" />
 
-          <div className={`transition-all duration-700 delay-[50ms]
-                          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h1 className="font-minecraft mb-5 text-[clamp(1.6rem,4vw,3.2rem)] leading-[1.4] text-white">
+          <div
+            className={`mb-16 transition-all duration-700 delay-[50ms]
+                        ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+          >
+            <h1 className="font-minecraft mb-4 text-[clamp(1.6rem,4vw,3.2rem)] leading-[1.4] text-white">
               Projects
             </h1>
-          </div>
-
-          <div className={`transition-all duration-700 delay-[150ms]
-                          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <p className="mb-12 max-w-md text-sm leading-loose text-slate-400">
-              Looking for a starting point or more instructions? Head over to{" "}
-              <a
-                href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                className="text-green-400 hover:underline"
-              >
-                Templates
-              </a>{" "}
-              or the{" "}
-              <a
-                href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                className="text-green-400 hover:underline"
-              >
-                Learning
-              </a>{" "}
-              center.
+            <p className="max-w-2xl text-lg leading-snug text-slate-400">
+              Look at what I&apos;ve worked on! These only include projects that
+              I&apos;ve been a part of since its creation (not including my work
+              for CMIMC).
             </p>
           </div>
 
-          <div className={`transition-all duration-700 delay-[350ms]
-                          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <div className="flex flex-wrap gap-4">
-              <a
-                className="flex items-center gap-2 bg-green-400 px-7 py-3 text-[0.7rem] uppercase tracking-widest text-[#080b10] transition-all hover:-translate-y-px hover:opacity-85"
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  className="invert"
-                  src="/vercel.svg"
-                  alt="Vercel logomark"
-                  width={16}
-                  height={16}
-                />
-                Deploy Now
-              </a>
-              <a
-                className="border border-white/[0.07] px-7 py-3 text-[0.7rem] uppercase tracking-widest text-slate-500 transition-colors hover:border-green-400 hover:text-green-400"
-                href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Documentation
-              </a>
-            </div>
+          <div
+            className={`space-y-16 transition-all duration-700 delay-150
+                        ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+          >
+            {PROJECT_SECTIONS.map((section) => (
+              <div key={section.title}>
+                <h2 className="font-minecraft mb-6 text-[1.1rem] text-white">
+                  {section.title}
+                </h2>
+                <ProjectGrid projects={section.projects} />
+              </div>
+            ))}
           </div>
         </section>
 

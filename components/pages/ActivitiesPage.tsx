@@ -27,7 +27,7 @@ const ACTIVITIES = [
   {
     title: "Grantflow",
     description:
-      "Building an application that helps nonprofits find grants, get personalized recommendations, and complete applications using fine-tuned large language models with retrieval-augmented generation (RAG).",
+      "Lead software engineer in a team building an application that helps nonprofits find grants, get personalized recommendations, and complete applications using fine-tuned large language models with retrieval-augmented generation (RAG).",
   },
 ];
 
@@ -36,8 +36,16 @@ const FEATURED_PROJECTS = [
     title: "Grantflow",
     description:
       "Helps nonprofits find grants, get personalized recommendations, and complete applications with fine-tuned LLMs and RAG.",
-    tags: ["LLM", "RAG", "Next.js"],
+    tags: ["LLM", "RAG", "React"],
+    href: "https://github.com/allanhotpotato/ProdHacks-ab2gene-"
   },
+  {
+    title: "MosaicGPU",
+    description:
+      "Reached TartanHacks 2026 Top 10. A web application that utilizes GPU power of multiple devices for 3d image rendering.",
+    tags: ["Supabase", "AWS", "WebGPU", "React"],
+    href: "https://github.com/asanth7/distributeGPU"
+  }
   // {
   //   title: "CMIMC Platform",
   //   description:
@@ -116,6 +124,7 @@ export default function ActivitiesPage() {
                 title={project.title}
                 description={project.description}
                 tags={project.tags}
+                href={project.href}
               />
             ))}
           </div>

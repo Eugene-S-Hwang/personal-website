@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 // In layout.tsx: import { Press_Start_2P, DM_Mono } from "next/font/google"
 // Then pass className to <body>. For portability we load via <link> here.
 
-const STACK = ["Python", "SQL", "React", "TypeScript", "Node.js", "Next.js", "C++", "C", "Google Cloud", "Supabase"];
+const STACK = ["Python", "SQL", "React", "TypeScript", "Next.js", "Streamlit", "C++", "C", "Google Cloud", "Supabase"];
 
 interface HomePageProps{
   onNavigate : (viewId: string) => void;
