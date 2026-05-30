@@ -17,7 +17,7 @@ const ACTIVITIES = [
   {
     title: "Changeling Lab · LTI",
     description:
-      "Research assistant to Professor David Mortensen at CMU's Language Technologies Institute, studying methods to detect specialized terminology.",
+      "Research assistant to Professor David Mortensen at CMU's Language Technologies Institute, studying methods to detect specialized terminology (slang, jargon, etc).",
   },
   {
     title: "CMIMC",

@@ -8,7 +8,7 @@ const GENERAL_PROJECTS: ProjectCardProps[] = [
     title: "Grantflow",
     description:
       "Helps nonprofits find grants, get personalized recommendations, and complete applications with fine-tuned LLMs and RAG.",
-    tags: ["LLM", "RAG", "React", "TypeScript"],
+    tags: ["React", "TypeScript", "Python", "Hugging Face Embeddings", "OpenAI API", "RAG", "Rest API"],
     href: "https://github.com/allanhotpotato/ProdHacks-ab2gene-",
   },
   {
@@ -28,7 +28,7 @@ const GENERAL_PROJECTS: ProjectCardProps[] = [
   {
     title: "Score Calculator for CMWMC (Carnegie Mellon Winter Math Competition)",
     description:
-      "A score calculator for participants of CMWMC 2025. Sent to over 60+ participants of the contest.",
+      "A score calculator for participants of CMWMC 2025. Sent to all participants of the contest (60+).",
     tags: ["Python", "Streamlit", "Google Sheets API"],
     href: "https://github.com/Eugene-S-Hwang/CMWMC_2025_Score_Calculator",
   },
