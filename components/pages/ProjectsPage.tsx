@@ -20,26 +20,14 @@ export default function ProjectsPage() {
                           -translate-x-1/4 rounded-full
                           bg-[radial-gradient(circle,rgba(74,222,128,0.07)_0%,transparent_70%)]" />
 
-          <div className={`mb-10 transition-all duration-700 delay-[50ms]
-                          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <Image
-              className="invert opacity-60"
-              src="/next.svg"
-              alt="Next.js logo"
-              width={100}
-              height={20}
-              priority
-            />
-          </div>
-
-          <div className={`transition-all duration-700 delay-150
+          <div className={`transition-all duration-700 delay-[50ms]
                           ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <h1 className="font-minecraft mb-5 text-[clamp(1.6rem,4vw,3.2rem)] leading-[1.4] text-white">
               Projects
             </h1>
           </div>
 
-          <div className={`transition-all duration-700 delay-[350ms]
+          <div className={`transition-all duration-700 delay-[150ms]
                           ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <p className="mb-12 max-w-md text-sm leading-loose text-slate-400">
               Looking for a starting point or more instructions? Head over to{" "}
@@ -60,7 +48,7 @@ export default function ProjectsPage() {
             </p>
           </div>
 
-          <div className={`transition-all duration-700 delay-[450ms]
+          <div className={`transition-all duration-700 delay-[350ms]
                           ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <div className="flex flex-wrap gap-4">
               <a

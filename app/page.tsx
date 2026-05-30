@@ -17,7 +17,7 @@ export default function Home() {
   const renderView = () => {
     switch (activeView) {
       case 'home':
-        return <HomePage />;
+        return <HomePage onNavigate={setActiveView}/>;
       case 'activities':
         return <ActivitiesPage />;
       case 'blog':
@@ -27,7 +27,7 @@ export default function Home() {
       case 'contacts':
         return <ContactPage />;
       default:
-        return <HomePage />;
+        return <HomePage onNavigate={setActiveView}/>;
     }
   };
 

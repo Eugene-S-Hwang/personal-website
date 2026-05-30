@@ -1,7 +1,56 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
+import ProjectCard from "@/components/ProjectCard";
+
+const ACTIVITIES = [
+  {
+    title: "Carnegie Mellon University",
+    description:
+      "Rising sophomore double majoring in Information Systems and Artificial Intelligence.",
+  },
+  {
+    title: "Cedge.ai",
+    description:
+      "Quantitative developer intern building investment tools for small hedge funds and individual investors.",
+  },
+  {
+    title: "Changeling Lab · LTI",
+    description:
+      "Research assistant to Professor David Mortensen at CMU's Language Technologies Institute, studying methods to detect specialized terminology.",
+  },
+  {
+    title: "CMIMC",
+    description:
+      "Software Head at Carnegie Mellon Informatics and Mathematics Competitions, building grading and admin systems for competitions serving 500+ high school students.",
+  },
+  {
+    title: "Grantflow",
+    description:
+      "Building an application that helps nonprofits find grants, get personalized recommendations, and complete applications using fine-tuned large language models with retrieval-augmented generation (RAG).",
+  },
+];
+
+const FEATURED_PROJECTS = [
+  {
+    title: "Grantflow",
+    description:
+      "Helps nonprofits find grants, get personalized recommendations, and complete applications with fine-tuned LLMs and RAG.",
+    tags: ["LLM", "RAG", "Next.js"],
+  },
+  // {
+  //   title: "CMIMC Platform",
+  //   description:
+  //     "Grading and admin systems for Carnegie Mellon Informatics and Mathematics Competitions, serving 500+ high school students.",
+  //   tags: ["Full-stack", "TypeScript"],
+  // },
+  // {
+  //   title: "Cedge.ai Tools",
+  //   description:
+  //     "Investment tooling for small hedge funds and individual investors, built as a quantitative developer intern.",
+  //   tags: ["Python", "Quant"],
+  // },
+];
 
 export default function ActivitiesPage() {
   const [mounted, setMounted] = useState(false);
@@ -15,78 +64,60 @@ export default function ActivitiesPage() {
       `}</style>
 
       <div className="font-mono-dm min-h-screen overflow-x-hidden bg-[#080b10] text-slate-200">
-        <section className="relative mx-auto flex max-w-5xl flex-col justify-center px-12 pb-20 pt-32">
+        <section className="relative mx-auto max-w-5xl px-12 pb-24 pt-32">
           <div className="pointer-events-none absolute left-1/2 top-1/4 h-[500px] w-[500px]
                           -translate-x-1/4 rounded-full
                           bg-[radial-gradient(circle,rgba(74,222,128,0.07)_0%,transparent_70%)]" />
 
           <div className={`mb-10 transition-all duration-700 delay-[50ms]
                           ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <Image
-              className="invert opacity-60"
-              src="/next.svg"
-              alt="Next.js logo"
-              width={100}
-              height={20}
-              priority
-            />
-          </div>
-
-          <div className={`transition-all duration-700 delay-150
-                          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h1 className="font-minecraft mb-5 text-[clamp(1.6rem,4vw,3.2rem)] leading-[1.4] text-white">
+            <h1 className="font-minecraft mb-4 text-[clamp(1.6rem,4vw,3.2rem)] leading-[1.4] text-white">
               Activities
             </h1>
+            <h2 className="text-lg text-slate-400">
+              What I am doing right now.
+            </h2>
           </div>
 
-          <div className={`transition-all duration-700 delay-[350ms]
-                          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <p className="mb-12 max-w-md text-sm leading-loose text-slate-400">
-              Looking for a starting point or more instructions? Head over to{" "}
-              <a
-                href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                className="text-green-400 hover:underline"
-              >
-                Templates
-              </a>{" "}
-              or the{" "}
-              <a
-                href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                className="text-green-400 hover:underline"
-              >
-                Learning
-              </a>{" "}
-              center.
-            </p>
-          </div>
-
-          <div className={`transition-all duration-700 delay-[450ms]
-                          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <div className="flex flex-wrap gap-4">
-              <a
-                className="flex items-center gap-2 bg-green-400 px-7 py-3 text-[0.7rem] uppercase tracking-widest text-[#080b10] transition-all hover:-translate-y-px hover:opacity-85"
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  className="invert"
-                  src="/vercel.svg"
-                  alt="Vercel logomark"
-                  width={16}
-                  height={16}
+          <ul
+            className={`list-none space-y-4 transition-all duration-700 delay-150
+                        ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+          >
+            {ACTIVITIES.map((activity) => (
+              <li key={activity.title} className="flex gap-3">
+                <span
+                  className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-green-400"
+                  aria-hidden
                 />
-                Deploy Now
-              </a>
-              <a
-                className="border border-white/[0.07] px-7 py-3 text-[0.7rem] uppercase tracking-widest text-slate-500 transition-colors hover:border-green-400 hover:text-green-400"
-                href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Documentation
-              </a>
-            </div>
+                <p className="text-lg leading-snug text-slate-400">
+                  <span className="text-white">{activity.title}</span>
+                  {" — "}
+                  {activity.description}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mx-auto max-w-5xl px-12 pb-24">
+          <h2
+            className={`font-minecraft mb-8 text-[1.1rem] text-white transition-all duration-700 delay-200
+                        ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+          >
+            Featured Projects
+          </h2>
+          <div
+            className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 transition-all duration-700 delay-300
+                        ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+          >
+            {FEATURED_PROJECTS.map((project) => (
+              <ProjectCard
+                key={project.title}
+                title={project.title}
+                description={project.description}
+                tags={project.tags}
+              />
+            ))}
           </div>
         </section>
 

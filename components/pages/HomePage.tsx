@@ -7,7 +7,11 @@ import { useState, useEffect } from "react";
 
 const STACK = ["Python", "SQL", "React", "TypeScript", "Node.js", "Next.js", "C++", "C", "Google Cloud", "Supabase"];
 
-export default function HomePage() {
+interface HomePageProps{
+  onNavigate : (viewId: string) => void;
+}
+
+export default function HomePage({ onNavigate } : HomePageProps) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setTimeout(() => setMounted(true), 50); }, []);
 
@@ -55,17 +59,19 @@ export default function HomePage() {
           <div className={`transition-all duration-700 delay-[450ms]
                           ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <div className="flex flex-wrap gap-4">
-              <a href="#work"
-                 className="bg-green-400 px-7 py-3 text-[0.7rem] uppercase tracking-widest
-                            text-[#080b10] transition-all hover:-translate-y-px hover:opacity-85">
+              <button
+                 className="cursor-pointer bg-green-400 px-7 py-3 text-[0.7rem] uppercase tracking-widest
+                            text-[#080b10] transition-all hover:-translate-y-px hover:opacity-85"
+                  onClick={() => onNavigate('projects')}>
                 View my work
-              </a>
-              <a href="#contact"
-                 className="border border-white/[0.07] px-7 py-3 text-[0.7rem] uppercase
+              </button>
+              <button 
+                 className="cursor-pointer border border-white/[0.07] px-7 py-3 text-[0.7rem] uppercase
                             tracking-widest text-slate-500 transition-colors
-                            hover:border-green-400 hover:text-green-400">
+                            hover:border-green-400 hover:text-green-400"
+                  onClick={() => onNavigate('contacts')}>
                 Get in touch
-              </a>
+              </button>
             </div>
           </div>
         </section>
@@ -94,7 +100,7 @@ export default function HomePage() {
             <h2 className="font-minecraft text-[1.1rem] text-white">About</h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-16">
             <div className="space-y-5 text-sm leading-loose text-slate-400">
               <p>
                 I&apos;m Eugene, a sophomore studying at Carnegie Mellon University. 
@@ -115,35 +121,6 @@ export default function HomePage() {
 
           </div>
         </section>
-
-        {/* ── Contact ─────────────────────────────────────── */}
-        {/* <section id="contact" className="mx-auto max-w-5xl px-12 py-24">
-          <div className="flex flex-wrap items-center justify-between gap-10
-                          border border-white/[0.07] bg-white/[0.03] p-14">
-            <h2 className="font-minecraft text-[clamp(0.85rem,1.8vw,1.3rem)] leading-relaxed text-white">
-              Let's build<br />something{" "}
-              <span className="text-green-400">great.</span>
-            </h2>
-            <div className="flex flex-col gap-3">
-              <a href="mailto:eugene@example.com"
-                 className="bg-green-400 px-7 py-3 text-center text-[0.65rem]
-                            uppercase tracking-widest text-[#080b10]
-                            transition-all hover:-translate-y-px hover:opacity-85">
-                ehwang2@andrew.cmu.edu
-              </a>
-              <div className="flex gap-3">
-                {["GitHub", "LinkedIn", "Twitter"].map((s) => (
-                  <a key={s} href="#"
-                     className="flex-1 border border-white/[0.07] px-4 py-3 text-center
-                                text-[0.6rem] uppercase tracking-widest text-slate-500
-                                transition-colors hover:border-green-400 hover:text-green-400">
-                    {s}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section> */}
 
         {/* ── Footer ──────────────────────────────────────── */}
         <footer className="mx-auto flex max-w-5xl flex-wrap items-center justify-between

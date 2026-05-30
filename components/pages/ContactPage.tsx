@@ -20,80 +20,17 @@ export default function ContactPage() {
                           -translate-x-1/4 rounded-full
                           bg-[radial-gradient(circle,rgba(74,222,128,0.07)_0%,transparent_70%)]" />
 
-          <div className={`mb-10 transition-all duration-700 delay-[50ms]
-                          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <Image
-              className="invert opacity-60"
-              src="/next.svg"
-              alt="Next.js logo"
-              width={100}
-              height={20}
-              priority
-            />
-          </div>
-
-          <div className={`transition-all duration-700 delay-150
+          <div className={`transition-all duration-700 delay-[50ms]
                           ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <h1 className="font-minecraft mb-5 text-[clamp(1.6rem,4vw,3.2rem)] leading-[1.4] text-white">
               Contacts
             </h1>
           </div>
-
-          <div className={`transition-all duration-700 delay-[350ms]
+          {/* "
+                          flex flex-wrap items-center justify-between gap-10
+                          border border-white/[0.07] bg-white/[0.03] p-14" */}
+          <div className={`transition-all duration-700 delay-150
                           ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <p className="mb-12 max-w-md text-sm leading-loose text-slate-400">
-              Looking for a starting point or more instructions? Head over to{" "}
-              <a
-                href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                className="text-green-400 hover:underline"
-              >
-                Templates
-              </a>{" "}
-              or the{" "}
-              <a
-                href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                className="text-green-400 hover:underline"
-              >
-                Learning
-              </a>{" "}
-              center.
-            </p>
-          </div>
-
-          <div className={`transition-all duration-700 delay-[450ms]
-                          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <div className="flex flex-wrap gap-4">
-              <a
-                className="flex items-center gap-2 bg-green-400 px-7 py-3 text-[0.7rem] uppercase tracking-widest text-[#080b10] transition-all hover:-translate-y-px hover:opacity-85"
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  className="invert"
-                  src="/vercel.svg"
-                  alt="Vercel logomark"
-                  width={16}
-                  height={16}
-                />
-                Deploy Now
-              </a>
-              <a
-                className="border border-white/[0.07] px-7 py-3 text-[0.7rem] uppercase tracking-widest text-slate-500 transition-colors hover:border-green-400 hover:text-green-400"
-                href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Documentation
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Contact ─────────────────────────────────────── */}
-        {/* <section id="contact" className="mx-auto max-w-5xl px-12 py-24">
-          <div className="flex flex-wrap items-center justify-between gap-10
-                          border border-white/[0.07] bg-white/[0.03] p-14">
             <h2 className="font-minecraft text-[clamp(0.85rem,1.8vw,1.3rem)] leading-relaxed text-white">
               Let's build<br />something{" "}
               <span className="text-green-400">great.</span>
@@ -117,7 +54,7 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
 
         <footer className="mx-auto flex max-w-5xl flex-wrap items-center justify-between
                            gap-2 border-t border-white/[0.07] px-12 py-6
