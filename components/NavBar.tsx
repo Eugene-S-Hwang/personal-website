@@ -11,8 +11,13 @@ const navItems = [
   { id: 'home', label: 'Home' },
   { id: 'activities', label: 'Activities' },
   { id: 'blog', label: 'Blog' },
-  { id: 'projects', label: 'Projects'}
+  { id: 'projects', label: 'Projects'},
 ];
+
+const navActiveClass =
+  "relative font-medium text-green-400 after:absolute after:bottom-[-2px] after:left-3.5 after:right-3.5 after:h-px after:rounded-full after:bg-green-400";
+
+const navInactiveClass = "text-slate-500 hover:text-green-400";
 
 export default function Navbar({ currentView, onNavigate }: TopNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -41,20 +46,22 @@ export default function Navbar({ currentView, onNavigate }: TopNavProps) {
               <button
                 key={item.id}
                 className={`nav-item ${
-                  currentView === item.id
-                    ? "font-medium text-green-400 after:absolute after:bottom-[-2px] after:left-3.5 after:right-3.5 after:h-px after:rounded-full after:bg-green-400"
-                    : "text-slate-500 hover:text-green-400"}`}
+                  currentView === item.id ? navActiveClass : navInactiveClass}`}
                 onClick={() => onNavigate(item.id)}
               >
-                <span className="relative cursor-pointer px-3.5 py-1.5 text-[0.65rem] uppercase tracking-widest transition-colors duration-150">{item.label}</span>
+                <span className="cursor-pointer px-3.5 py-1.5 text-[0.65rem] uppercase tracking-widest transition-colors duration-150">{item.label}</span>
               </button>
             ))}
           </ul>
 
           {/* Desktop CTA */}
           <button
-            className="hidden cursor-pointer border border-white/[0.07] px-4 py-1.5 text-[0.65rem] uppercase tracking-widest text-slate-500 transition-colors duration-150 hover:border-green-400 hover:text-green-400 sm:inline-flex"
-            onClick={() => onNavigate('contacts')}
+            className={`hidden cursor-pointer px-4 py-1.5 text-[0.65rem] uppercase tracking-widest transition-colors duration-150 sm:inline-flex ${
+              currentView === "contacts"
+                ? `${navActiveClass} after:left-0 after:right-0`
+                : "border border-white/[0.07] text-slate-500 hover:border-green-400 hover:text-green-400"
+            }`}
+            onClick={() => onNavigate("contacts")}
           >
             Contact →
           </button>
@@ -94,19 +101,19 @@ export default function Navbar({ currentView, onNavigate }: TopNavProps) {
               <button
                 key={item.id}
                 className={`nav-item ${
-                  currentView === item.id
-                    ? "font-medium text-green-400 after:absolute after:bottom-[-2px] after:left-3.5 after:right-3.5 after:h-px after:rounded-full after:bg-green-400"
-                    : "text-slate-500 hover:text-green-400"}`}
+                  currentView === item.id ? navActiveClass : navInactiveClass}`}
                 onClick={() => onNavigate(item.id)}
               >
-                <span className="relative px-3.5 py-1.5 text-[0.65rem] uppercase tracking-widest transition-colors duration-150">{item.label}</span>
+                <span className="px-3.5 py-1.5 text-[0.65rem] uppercase tracking-widest transition-colors duration-150">{item.label}</span>
               </button>
             ))}
             <div className="my-1.5 h-px bg-white/[0.07]" />
             <button
-              className="block px-3.5 py-2.5 text-[0.65rem] uppercase tracking-widest text-slate-500 transition-colors duration-150 hover:text-green-400"
+              className={`block px-3.5 py-2.5 text-[0.65rem] uppercase tracking-widest transition-colors duration-150 ${
+                currentView === "contacts" ? navActiveClass : navInactiveClass
+              }`}
               onClick={() => {
-                onNavigate('contacts');
+                onNavigate("contacts");
                 setMenuOpen(false);
               }}
             >

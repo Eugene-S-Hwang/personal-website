@@ -90,7 +90,7 @@ const RESEARCH_PROJECTS: ProjectCardProps[] = [
 
 const PROJECT_SECTIONS = [
   { title: "General", projects: GENERAL_PROJECTS },
-  { title: "Contest Answers", projects: CONTEST_PROJECTS },
+  { title: "Contests", projects: CONTEST_PROJECTS },
   { title: "Research", projects: RESEARCH_PROJECTS },
 ] as const;
 
