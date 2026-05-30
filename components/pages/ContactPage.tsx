@@ -1,11 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 export default function ContactPage() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setTimeout(() => setMounted(true), 50); }, []);
+
+  const links = [
+    {
+      type: "Github",
+      link: "https://github.com/Eugene-S-Hwang"
+    },
+    {
+      type: "Linkedin",
+      link: "https://www.linkedin.com/in/eugene-s-hwang/"
+    }
+  ]
 
   return (
     <>
@@ -32,23 +42,22 @@ export default function ContactPage() {
           <div className={`transition-all duration-700 delay-150
                           ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <h2 className="font-minecraft text-[clamp(0.85rem,1.8vw,1.3rem)] leading-relaxed text-white">
-              Let's build<br />something{" "}
-              <span className="text-green-400">great.</span>
+              Let's connect
             </h2>
             <div className="flex flex-col gap-3">
-              <a href="mailto:eugene@example.com"
+              <a href="mailto:ehwang2@andrew.cmu.edu"
                  className="bg-green-400 px-7 py-3 text-center text-[0.65rem]
                             uppercase tracking-widest text-[#080b10]
                             transition-all hover:-translate-y-px hover:opacity-85">
                 ehwang2@andrew.cmu.edu
               </a>
               <div className="flex gap-3">
-                {["GitHub", "LinkedIn", "Twitter"].map((s) => (
-                  <a key={s} href="#"
+                {links.map((s) => (
+                  <a key={s.type} href={s.link}
                      className="flex-1 border border-white/[0.07] px-4 py-3 text-center
                                 text-[0.6rem] uppercase tracking-widest text-slate-500
                                 transition-colors hover:border-green-400 hover:text-green-400">
-                    {s}
+                    {s.type}
                   </a>
                 ))}
               </div>

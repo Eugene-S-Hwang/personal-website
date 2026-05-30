@@ -30,51 +30,8 @@ export default function BlogPage() {
           <div className={`transition-all duration-700 delay-[150ms]
                           ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <p className="mb-12 max-w-md text-sm leading-loose text-slate-400">
-              Looking for a starting point or more instructions? Head over to{" "}
-              <a
-                href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                className="text-green-400 hover:underline"
-              >
-                Templates
-              </a>{" "}
-              or the{" "}
-              <a
-                href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                className="text-green-400 hover:underline"
-              >
-                Learning
-              </a>{" "}
-              center.
+              Posts coming soon!
             </p>
-          </div>
-
-          <div className={`transition-all duration-700 delay-[350ms]
-                          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <div className="flex flex-wrap gap-4">
-              <a
-                className="flex items-center gap-2 bg-green-400 px-7 py-3 text-[0.7rem] uppercase tracking-widest text-[#080b10] transition-all hover:-translate-y-px hover:opacity-85"
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  className="invert"
-                  src="/vercel.svg"
-                  alt="Vercel logomark"
-                  width={16}
-                  height={16}
-                />
-                Deploy Now
-              </a>
-              <a
-                className="border border-white/[0.07] px-7 py-3 text-[0.7rem] uppercase tracking-widest text-slate-500 transition-colors hover:border-green-400 hover:text-green-400"
-                href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Documentation
-              </a>
-            </div>
           </div>
         </section>
 
